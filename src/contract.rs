@@ -70,6 +70,7 @@ mod tests {
         let mut deps = mock_dependencies(20, &[]);
 
         let init_now = Local::now().format("%Y-%m-%d|%H:%M").to_string();
+        let expected_now = Local::now().format("%Y-%m-%d|%H:%M").to_string();
         let msg = InitMsg { time: init_now };
         let env = mock_env(&deps.api, "creator", &coins(1000, "earth"));
 
@@ -80,7 +81,7 @@ mod tests {
         // it worked, let's query the state
         let res = query(&deps, QueryMsg::GetTime {}).unwrap();
         let value: TimeResponse = from_binary(&res).unwrap();
-        assert_eq!(init_now, value.time);
+        assert_eq!(expected_now, value.time);
     }
 
     #[test]
@@ -88,6 +89,7 @@ mod tests {
         let mut deps = mock_dependencies(20, &coins(2, "token"));
 
         let init_now = Local::now().format("%Y-%m-%d|%H:%M").to_string();
+        let expected_now = Local::now().format("%Y-%m-%d|%H:%M").to_string();
         let msg = InitMsg { time: init_now };
         let env = mock_env(&deps.api, "creator", &coins(2, "token"));
         let _res = init(&mut deps, env, msg).unwrap();
@@ -100,6 +102,6 @@ mod tests {
         // should set time 
         let res = query(&deps, QueryMsg::GetTime {}).unwrap();
         let value: TimeResponse = from_binary(&res).unwrap();
-        assert_eq!(init_now, value.time);
+        assert_eq!(expected_now, value.time);
     }
 }
