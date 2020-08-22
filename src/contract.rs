@@ -3,9 +3,9 @@ use cosmwasm_std::{
     StdResult, Storage,
 };
 
-use crate::msg::{TimeResponse, CountResponse, HandleMsg, InitMsg, QueryMsg};
+use crate::msg::{TimeResponse, HandleMsg, InitMsg, QueryMsg};
 use crate::state::{config, config_read, State};
-extern crate chrono;
+use chrono;
 use chrono::Local;
 
 pub fn init<S: Storage, A: Api, Q: Querier>(
@@ -38,7 +38,7 @@ pub fn try_set_time<S: Storage, A: Api, Q: Querier>(
     _env: Env,
 ) -> StdResult<HandleResponse> {
     config(&mut deps.storage).update(|mut state| {
-        state.time = Local::now().format("%Y-%m-%d|%H:%M");
+        state.time = Local::now().format("%Y-%m-%d|%H:%M").to_string();
         Ok(state)
     })?;
 
@@ -69,7 +69,7 @@ mod tests {
     fn proper_initialization() {
         let mut deps = mock_dependencies(20, &[]);
 
-        let init_now = Local::now().format("%Y-%m-%d|%H:%M");
+        let init_now = Local::now().format("%Y-%m-%d|%H:%M").to_string();
         let msg = InitMsg { time: init_now };
         let env = mock_env(&deps.api, "creator", &coins(1000, "earth"));
 
@@ -87,7 +87,7 @@ mod tests {
     fn set_time() {
         let mut deps = mock_dependencies(20, &coins(2, "token"));
 
-        let init_now = Local::now().format("%Y-%m-%d|%H:%M");
+        let init_now = Local::now().format("%Y-%m-%d|%H:%M").to_string();
         let msg = InitMsg { time: init_now };
         let env = mock_env(&deps.api, "creator", &coins(2, "token"));
         let _res = init(&mut deps, env, msg).unwrap();
