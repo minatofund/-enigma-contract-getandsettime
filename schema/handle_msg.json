@@ -5,31 +5,11 @@
     {
       "type": "object",
       "required": [
-        "increment"
+        "set_time"
       ],
       "properties": {
-        "increment": {
+        "set_time": {
           "type": "object"
-        }
-      }
-    },
-    {
-      "type": "object",
-      "required": [
-        "reset"
-      ],
-      "properties": {
-        "reset": {
-          "type": "object",
-          "required": [
-            "count"
-          ],
-          "properties": {
-            "count": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
         }
       }
     }

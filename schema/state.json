@@ -3,16 +3,15 @@
   "title": "State",
   "type": "object",
   "required": [
-    "count",
-    "owner"
+    "owner",
+    "time"
   ],
   "properties": {
-    "count": {
-      "type": "integer",
-      "format": "int32"
-    },
     "owner": {
       "$ref": "#/definitions/CanonicalAddr"
+    },
+    "time": {
+      "type": "string"
     }
   },
   "definitions": {

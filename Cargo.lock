@@ -59,6 +59,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "cosmwasm-schema"
+version = "0.10.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1592dd62fbf542dca476606d4768ae54c5febd586c5e246d147c3c90b2f4289c"
+dependencies = [
+ "schemars",
+ "serde_json",
+]
+
+[[package]]
 name = "cosmwasm-std"
 version = "0.9.0-alpha1"
 source = "git+https://github.com/enigmampc/SecretNetwork?tag=v0.7.0#b3c77fa8a877996f7fdabc7d96361cde9b0f6484"
@@ -90,6 +100,7 @@ name = "getandsettime"
 version = "0.1.0"
 dependencies = [
  "chrono",
+ "cosmwasm-schema",
  "cosmwasm-std",
  "cosmwasm-storage",
  "schemars",
